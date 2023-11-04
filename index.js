@@ -76,26 +76,19 @@ async function run() {
         app.get('/studentInfo', verifyToken, async (req, res) => {
             const queryEmail = req.query?.email;
             const tokenEmail = req.user?.email;
-            console.log('query email',queryEmail)
-            console.log('token email', tokenEmail)
 
-            // if (queryEmail !== tokenEmail) {
-            //     return res.status(403).send({
-            //         message: 'Forbidden'
-            //     })
-            // }
+            if (queryEmail !== tokenEmail) {
+                return res.status(403).send({
+                    message: 'Forbidden'
+                })
+            }
 
-            // let query = {};
-            // if (queryEmail) {
-            //     query = { email: queryEmail }
-            // }
+            let query = {};
+            if (queryEmail) {
+                query = { userEmail: queryEmail }
+            }
 
-            // let query = {
-            //     student_email: queryEmail
-            // };
-            // console.log(query)
-
-            const cursor = studentCollection.find();
+            const cursor = studentCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
         })
@@ -178,8 +171,6 @@ async function run() {
                 .clearCookie('token', { maxAge: 0 })
                 .send({ message: 'logOut completed' })
         })
-
-
 
 
 
