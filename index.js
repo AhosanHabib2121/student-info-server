@@ -11,8 +11,8 @@ const {MongoClient, ServerApiVersion, ObjectId} = require('mongodb');
 app.use(cors({
     origin: [
         // 'http://localhost:5173'
-        'https://student-info-server-bay.vercel.app',
-        'student-info-server-2aaxx9hne-habibs-projects-f48ee51a.vercel.app'
+        'https://student-info-cb26e.web.app',
+        'https://student-info-cb26e.firebaseapp.com'
     ],
     credentials:true
 }));
